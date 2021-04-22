@@ -31,13 +31,16 @@ def revelar_uma_letra(uma_palavra, a_palavra_mostrada, um_indice):
 print("+----------JOGO DA FORCA----------+")
 palavra = ""
 while True:
-    palavra = input("Digite uma palavra: ").lower()
+    #palavra = input("Digite uma palavra: ").lower()
+    palavra = "banana"
     if(not tem_caractere(" ", palavra) and palavra.isalpha()):
         break
     else:
         print("\nDigite apenas uma palavra, sem numeros")
         print("+---------------------------------+")
 
+
+letras_chutadas = []
 numero_de_vidas = 6
 numero_de_dicas = math.floor(len(palavra) / 3)
 palavra_mostrada = "_" * len(palavra)
@@ -54,9 +57,9 @@ while True:
     print("2. Chutar uma letra")
     print("3. Chutar a palavra")
     print("0. Sair")
-    opcao = int(input(": "))
-
-    if(opcao == 1):
+    #opcao = int(input(": "))
+    opcao = 2
+    if(opcao == 1): 
         if(numero_de_dicas < 0):
             print("Sem mais dicas")
         else:
@@ -67,8 +70,35 @@ while True:
 
 
     if(opcao == 2):
-        pass
-        #chutar letra
+        letra = input("Digite uma letra: ").lower()[0]
+        if(letras_chutadas.count(letra) == 0 and letra.isalpha() and palavra.count(letra) > 0):
+            
+            palavra_mostrada = revelar_letra(palavra, palavra_mostrada, letra)
+            letras_chutadas.append(letra)
+            print(">>>>>>>>>>>" + palavra_mostrada)
+        
+        elif(not letra.isalpha()):
+            print("Digite apenas letras")
+
+        elif(letras_chutadas.count(letra) > 0):
+            print("Esta letra ja foi chutada")
+
+        elif(palavra.count(letra) == 0):
+            print("Não tem essa letra")
+            letras_chutadas.append(letra)
+            numero_de_vidas -= 1
+
+        if(numero_de_vidas == 0):
+
+            print("Infelizmente você não advinhou a palavra")
+            exit()
+
+        if(palavra == palavra_mostrada):
+            print("Parabens, você descobriu a palavra")
+            exit()
+
     if(opcao == 3):
         pass
         #chutar palavra
+    if(opcao == 0):
+        break
