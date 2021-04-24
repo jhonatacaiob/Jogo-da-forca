@@ -38,8 +38,7 @@ def revelar_uma_letra(uma_palavra, a_palavra_mostrada, um_indice):
 print("+----------JOGO DA FORCA----------+")
 palavra = ""
 while True:
-    #palavra = input("Digite uma palavra: ").lower()
-    palavra = "banana"
+    palavra = input("Digite uma palavra: ").lower()
     if(e_palavra(palavra)):
         break
 
