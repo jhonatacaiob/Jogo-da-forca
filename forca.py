@@ -1,8 +1,13 @@
 import random, math
 
+def tem_caractere(um_caractere, uma_serie_de_letras):
+    if(uma_serie_de_letras.count(um_caractere) == 0):
+        return False
+    else:
+        return True
 
 def e_palavra(uma_palavra):
-    if(not " " in uma_palavra and palavra.isalpha()):
+    if(not tem_caractere(" ", uma_palavra) and palavra.isalpha()):
         return True
     else:
         print("\nDigite apenas uma palavra, sem numeros")
@@ -17,12 +22,10 @@ def revelar_letras(uma_palavra, a_palavra_mostrada, uma_letra):
     a_palavra_mostrada_vetor = " ".join(a_palavra_mostrada).split(" ")
     
     indice = 0
-    for i in range(uma_palavra_vetor.count(uma_letra)):
-        
+    for i in range(0, uma_palavra_vetor.count(uma_letra)):
         indice = uma_palavra_vetor.index(uma_letra, indice, len(uma_palavra_vetor))
         a_palavra_mostrada_vetor[indice] = uma_letra
         indice += 1
-
     return "".join(a_palavra_mostrada_vetor)
 
 def revelar_uma_letra(uma_palavra, a_palavra_mostrada, um_indice):
@@ -38,7 +41,8 @@ def revelar_uma_letra(uma_palavra, a_palavra_mostrada, um_indice):
 print("+----------JOGO DA FORCA----------+")
 palavra = ""
 while True:
-    palavra = input("Digite uma palavra: ").lower()
+    #palavra = input("Digite uma palavra: ").lower()
+    palavra = "banana"
     if(e_palavra(palavra)):
         break
 
@@ -63,7 +67,6 @@ while True:
     print("2. Chutar uma letra")
     print("3. Chutar a palavra")
     print("0. Sair")
-
     opcao = input(": ")
     if(not opcao.isalpha()):
         opcao = int(opcao)
@@ -89,10 +92,10 @@ while True:
         if(not letra.isalpha()):
             print("Digite apenas letras")
 
-        elif(letra in letras_chutadas):
+        elif(tem_caractere(letra, letras_chutadas)):
             print("Esta letra ja foi chutada!! Tente outra")
 
-        elif(not letra in palavra):
+        elif(not tem_caractere(letra, palavra)):
             print("Não tem essa letra!! -1 vida")
             letras_chutadas.append(letra)
             numero_de_vidas -= 1
@@ -114,7 +117,7 @@ while True:
     if(opcao == 3):
         print("Se você errar, você perde")
         palavra_chutada = input("Digite uma palavra: ")
-        if(not " " in palavra and palavra.isalpha()):
+        if(not tem_caractere(" ", palavra) and palavra.isalpha()):
             if(palavra_chutada==palavra):
                 print("PARABENS!!! VOCÊ ACERTOU")
             else:
