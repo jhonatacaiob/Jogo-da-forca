@@ -1,10 +1,8 @@
 import random, math
 
 def tem_caractere(um_caractere, uma_serie_de_letras):
-    if(uma_serie_de_letras.count(um_caractere) == 0):
-        return False
-    else:
-        return True
+    return uma_serie_de_letras.count(um_caractere) == 0
+
 
 def e_palavra(uma_palavra):
     if(not tem_caractere(" ", uma_palavra) and palavra.isalpha()):
